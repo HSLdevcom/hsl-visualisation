@@ -17,20 +17,31 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 	<script>
-		var map = L.map('map').setView([60.17226, 24.97776], 13);
+		var map = L.map('map').setView([60.19308, 24.97192], 11);
 		L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
 			key: 'BC9A493B41014CAABB98F0471D759707'
 		}).addTo(map);
 
-                $.getJSON("http://tuukka.kapsi.fi/tmp/geojson.cgi?line=1300M_20110606_1&callback=?", function(data) {
-			line_layer = L.geoJson([data], {
+		function addLine(id, style) {
+			$.getJSON("http://tuukka.kapsi.fi/tmp/geojson.cgi?line="+id+"&callback=?", function(data) {
+				line_layer = L.geoJson([data], {
 
-				style: { color: "orange" },
+					style: style,
 
-			});
-	                line_layer.addTo(map);
-                });
+				});
+
+				line_layer.addTo(map);
+                	});
+		}
+
+		addLine("1300M_20110606_1", { color: "orange" });
+		addLine("1300V_20110606_1", { color: "orange" });
+		addLine("3001K_20120502_1", { color: "red" });
+		addLine("3002L_20120502_1", { color: "red" });
+		addLine("3002M_20120701_1", { color: "red" });
+		addLine("2550_20130128_1",  { color: "blue" });
+		addLine("1019_19950101_1",  { color: "cyan" });
 	</script>
 </body>
 </html>
